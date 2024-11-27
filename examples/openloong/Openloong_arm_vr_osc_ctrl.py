@@ -4,14 +4,14 @@ import time
 
 import numpy as np
 
-
+from envs.robomimic.dataset_util import DatasetWriter
 
 current_file_path = os.path.abspath('./../../')
 
 if current_file_path not in sys.path:
     print("add path: ", current_file_path)
     sys.path.append(current_file_path)
-from envs.robomimic.dataset_util import DatasetWriter
+
 
 import gymnasium as gym
 from gymnasium.envs.registration import register

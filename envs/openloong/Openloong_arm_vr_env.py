@@ -38,8 +38,10 @@ class OpenloongArmEnv(OrcaGymRemoteEnv):
         )
 
         formatted_now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        self.dataset_writer = DatasetWriter(file_path=f"teleoperation_dataset_{formatted_now}.hdf5")
-      
+        self.dataset_writer = DatasetWriter(file_path=f"teleoperation_dataset_{formatted_now}.hdf5",
+                                            env_name="OpenloongArmEnv",
+                                            env_version="v1",
+                                            env_kwargs=kwargs)
         # Three auxiliary variables to understand the component of the xml document but will not be used
         # number of actuators/controls: 7 arm joints and 2 gripper joints
         self.nu = self.model.nu
@@ -324,7 +326,7 @@ class OpenloongArmEnv(OrcaGymRemoteEnv):
             action_list.append(action)
 
             if terminated or truncated:
-                # Once episode is done, record the collected data
+                # Once episode is finished, record the collected data
                 self.record_data(obs_list, action_list, reward_list, done_list, info_list)
                 break
 
